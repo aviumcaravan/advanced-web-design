@@ -1,0 +1,40 @@
+@startuml
+
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table(uzytkownik)
+{
+	column( nazwa_uzy )
+}
+
+table(komentarze)
+{
+	column( text_kom )
+}
+
+table(zdjecia)
+{
+	column( link_zdj )
+	column( text_alt )
+}
+
+table(album)
+{
+	column( nazwa_alb )
+}
+
+table(galeria)
+{
+	column( nazwa_uzy )
+}
+
+uzytkownik --|{ komentarze
+uzytkownik --|{ zdjecia
+uzytkownik --|{ album
+uzytkownik --|{ galeria
+komentarze --|{ zdjecia
+zdjecia --|{ album
+album --|{ galeria
+
+@enduml

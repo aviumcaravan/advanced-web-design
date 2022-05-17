@@ -1,0 +1,54 @@
+@startuml
+
+!define primary_key(x) <b><color:#b8861b><&key></color> x</b>
+!define foreign_key(x) <color:#aaaaaa><&key></color> x
+!define column(x) <color:#efefef><&media-record></color> x
+!define table(x) entity x << (T, white) >>
+
+table(uzytkownik)
+{
+	primary_key( id_uzy ): integer
+	column( nazwa_uzy ): text
+}
+
+table(komentarze)
+{
+	primary_key( id_kom ): integer
+	column( text_kom ): text
+	foreign_key( id_uzy ): integer
+	foreign_key( id_zdj ): integer
+}
+
+table(zdjecia)
+{
+	primary_key( id_zdj ): integer
+	column( link_zdj ): text
+	column( text_alt ): text
+	foreign_key( id_uzy ): integer
+	foreign_key( id_alb ): integer
+}
+
+table(album)
+{
+	primary_key( id_alb ): integer
+	column( nazwa_alb ): text
+	foreign_key( id_uzy ): integer
+	foreign_key( id_gal ): integer
+}
+
+table(galeria)
+{
+	primary_key( id_gal ): integer
+	column( nazwa_uzy ): text
+	foreign_key( id_uzy ): integer
+}
+
+uzytkownik --|{ komentarze
+uzytkownik --|{ zdjecia
+uzytkownik --|{ album
+uzytkownik --|{ galeria
+komentarze --|{ zdjecia
+zdjecia --|{ album
+album --|{ galeria
+
+@enduml
